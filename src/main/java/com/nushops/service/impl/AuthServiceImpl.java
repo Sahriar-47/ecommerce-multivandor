@@ -65,8 +65,6 @@ public class AuthServiceImpl implements AuthService {
                     throw new Exception("user not exits with provided email");
                 }
             }
-
-
         }
 
         VerificationCode isExist = verificationCodeRepository.findByEmail(email);
@@ -88,10 +86,10 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public String createUser(SignupRequest req) throws Exception {
 
-        VerificationCode verificationCode = verificationCodeRepository.findByEmail(req.getEmail());
-        if(verificationCode==null || !verificationCode.getOtp().equals(req.getOtp())){
-            throw new Exception("wrong otp...");
-        }
+//        VerificationCode verificationCode = verificationCodeRepository.findByEmail(req.getEmail());
+//        if(verificationCode==null || !verificationCode.getOtp().equals(req.getOtp())){
+//            throw new Exception("wrong otp...");
+//        }
 
         User user = userRepository.findByEmail(req.getEmail());
         if (user == null) {
@@ -143,6 +141,11 @@ public class AuthServiceImpl implements AuthService {
         UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
         if(userDetails == null){
             throw new BadCredentialsException("invalid username or password");
+        }
+
+        String SELLER_PREFIX = "seller_";
+        if(username.startsWith(SELLER_PREFIX)) {
+            username = username.substring(SELLER_PREFIX.length());
         }
 
         VerificationCode verificationCode = verificationCodeRepository.findByEmail(username);

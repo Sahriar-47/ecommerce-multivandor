@@ -51,7 +51,8 @@ public class SellerServiceImpl implements SellerService {
         newSeller.setBandkDetails(seller.getBandkDetails());
         newSeller.setBusinessDetails(seller.getBusinessDetails());
 
-        return sellerRepository.save(newSeller);
+        Seller savedSeller = sellerRepository.save(newSeller);
+        return savedSeller;
     }
 
     @Override
@@ -112,7 +113,7 @@ public class SellerServiceImpl implements SellerService {
     @Override
     public Seller verifyEmail(String email, String otp) throws Exception {
         Seller seller = getSellerByEmail(email);
-        seller.setEmailVerified(true);
+        seller.setIsEmailVerified(true);
         return sellerRepository.save(seller);
     }
 

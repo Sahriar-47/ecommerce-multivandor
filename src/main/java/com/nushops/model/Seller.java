@@ -14,7 +14,7 @@ import lombok.*;
 public class Seller {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
     private String sellerName;
 
@@ -37,7 +37,7 @@ public class Seller {
 
     private USER_ROLE role = USER_ROLE.ROLE_SELLER;
 
-    private boolean isEmailVerified = false;
+    private Boolean isEmailVerified = false;
 
     private AccountStatus accountStatus = AccountStatus.PENDING_VERIFICATION;
 

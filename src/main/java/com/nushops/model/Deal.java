@@ -12,7 +12,7 @@ import lombok.*;
 public class Deal {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
     private Integer discount;
 
